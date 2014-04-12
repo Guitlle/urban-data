@@ -8,11 +8,7 @@
   min-height: 400px;
 }
 
-#section1,
-#section2,
-#section3,
-#section4,
-#section5 {
+.divider {
   height: 500px;
 }
 
@@ -90,10 +86,6 @@
 
 .navbar-toggle {
 	outline:0;
-}
-
-.divider {
-	height:50px;
 }
 
 .scroll-top {
