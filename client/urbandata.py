@@ -3,10 +3,10 @@ import json
 import datetime
 
 #url = 'http://198.199.98.147:1234/'
-url = '171.17.10.57:5000'
+url = 'http://172.17.0.160:5000/data_point'
 agent = 'Raspie V1'
 
-def sendData(latitud, longitud, agent, extra)
+def send(latitud, longitud, agent, extra):
   headers = {'content-type': 'application/json'}
   
   properties = {
@@ -15,7 +15,7 @@ def sendData(latitud, longitud, agent, extra)
     
   }
   
-  dict(properties.items() + extra.items())
+  properties = dict(properties.items() + extra.items())
   
   payload = {
     "type": "Feature",
@@ -25,7 +25,7 @@ def sendData(latitud, longitud, agent, extra)
     },
     "properties": properties
   }
-  
+  print payload;
   r = requests.post(url, data=json.dumps(payload), headers=headers)
 
 # usage :   
