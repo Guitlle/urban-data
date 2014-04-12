@@ -26,10 +26,11 @@ MONGO_PORT = 27017
 #MONGO_USERNAME = 'user'
 #MONGO_PASSWORD = 'user'
 MONGO_DBNAME = 'urban'
-
+X_DOMAIN = '*'
+X_HEADERS = ['Authorization', 'Content-Type']
+DATE_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
 # let's not forget the API entry point (not really needed anyway)
 #SERVER_NAME = '127.0.0.1:5000'
-
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide

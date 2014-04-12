@@ -2,11 +2,22 @@ import requests
 import json
 import datetime
 
-#url = 'http://198.199.98.147:1234/'
-url = 'http://172.17.0.160:5000/data_point'
-agent = 'Raspie V1'
+Config = {
+    'url' : 'http://198.199.98.147:5000/data_point',
+    'agent' : 'Default'
+    'user' : 'urbanuser',
+    'password' : 'urbankey' 
+  }
 
-def send(latitud, longitud, agent, extra):
+# send (latitud, longitud, extra)
+# Sends a bundle of data to the server as a geojson point 
+# usage :
+#send( 14.123, -90.1234, {
+#  'ambient_temperature': 27.2,
+#  'pressure': 123.21,
+#  'humidity': 123.4567
+#})
+def send(latitud, longitud, extra):
   headers = {'content-type': 'application/json'}
   
   properties = {
@@ -25,13 +36,4 @@ def send(latitud, longitud, agent, extra):
     },
     "properties": properties
   }
-  print payload;
-  r = requests.post(url, data=json.dumps(payload), headers=headers)
-
-# usage :   
-#data = {
-  #'ambient_temperature': 27.2,
-  #'pressure': 123.21,
-  #'humidity': 123.4567
-  #}
-#sendData( 14.123, -90.1234, agent, data)
+  r = requests.post(url, data=json.dumps(payload), headers=headers, auth=(user, password))

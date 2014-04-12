@@ -2,7 +2,7 @@ $(function() {
   /* affix the navbar after scroll below header */
   $('#nav').affix({
     offset: {
-      top: $('header').height() - $('#nav').height()
+      top: $(window).height() - $('#nav').height()
     }
   });
 
@@ -20,4 +20,18 @@ $(function() {
     var posi = $(link).offset().top;
     $('body,html').animate({scrollTop:posi}, 700);
   });
+
+  var mapHeight = $(window).height() - $('#nav').height()
+  $('.masthead').height(mapHeight);
+  $('#map').height(mapHeight);
+
+  // initialize the map on the "map" div with a given center and zoom
+  var map = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 13
+  });
+  // add an OpenStreetMap tile layer
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 });
