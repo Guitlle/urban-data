@@ -25,9 +25,12 @@ MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
 #MONGO_USERNAME = 'user'
 #MONGO_PASSWORD = 'user'
+SORTING = True
 MONGO_DBNAME = 'urban'
-X_DOMAIN = '*'
-X_HEADERS = ['Authorization', 'Content-Type']
+X_DOMAINS = '*'
+PAGINATION_DEFAULT=1000
+PAGINATION_LIMIT=2000
+X_HEADERS = ['Authorization', 'Content-Type', 'Access-Control-Allow-Origin']
 DATE_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
 # let's not forget the API entry point (not really needed anyway)
 #SERVER_NAME = '127.0.0.1:5000'
@@ -75,7 +78,8 @@ data_point = {
                     "default": "Feature",
                     "allowed": ["Feature"]
                 }
-        }
+        },
+      "datasource": {"default_sort": [("_created", -1)]}
 }
 
 
