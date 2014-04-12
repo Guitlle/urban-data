@@ -13,6 +13,7 @@
   <!-- Le Bootstrap and App CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 
   <!-- Modernizr and RespondJS to support old browsers -->
   <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -27,6 +28,7 @@
 
     <header class="masthead">
       <!-- The Map -->
+      <div id="map"></div>
     </header>
 
     <!-- Fixed navbar -->
@@ -85,7 +87,7 @@
     </div>
   </div>
 
-  <ul class="nav pull-right scroll-top">
+  <ul class="nav pull-right scroll-top" style="display:none">
     <li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
   </ul>
 
@@ -96,6 +98,8 @@
 
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
