@@ -79,7 +79,7 @@ data_point = {
                     "allowed": ["Feature"]
                 }
         },
-      "datasource": {"default_sort": [{"_created": -1}]}
+      "datasource": {"default_sort": [("_created", -1)]}
 }
 
 
