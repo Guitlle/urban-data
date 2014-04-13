@@ -1,7 +1,9 @@
-var heatmapLayer;
-var testData=[];
-for (var i = 0; i < 100; i++)
-  testData.push({lat: Math.random()* 0.1 + 14.6 , lon: -90.55 + Math.random()*0.1, value: Math.random() });
+function genrandata() {
+  var testData = [];
+  for (var i = 0; i < 100; i++)
+    testData.push({lat: Math.random()* 0.1 + 14.6 , lon: -90.55 + Math.random()*0.1, value: Math.random() });
+  return testData;
+}
 $(function() {
   /* affix the navbar after scroll below header */
   $('#nav').affix({
@@ -33,10 +35,10 @@ $(function() {
   var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   });
-
-  heatmapLayer = L.TileLayer.heatMap({
+  
+  var heatmapLayer = L.TileLayer.heatMap({
       radius: 20,
-      opacity: 0.8,
+      opacity: 0.6,
       gradient: {
 	  0.45: "rgb(0,0,255)",
 	  0.55: "rgb(0,255,255)",
@@ -45,18 +47,83 @@ $(function() {
 	  1.0: "rgb(255,0,0)"
       }
   });
+  var humidityLayer = L.TileLayer.heatMap({
+      radius: 20,
+      opacity: 0.6,
+      gradient: {
+	  0.45: "rgb(0,0,20)",
+	  0.55: "rgb(0,0,60)",
+	  0.65: "rgb(0,0,100)",
+	  0.95: "rgb(0,0,130)",
+	  1.0: "rgb(0,0,200)"
+      }
+  });
+  var lightLayer = L.TileLayer.heatMap({
+      radius: 20,
+      opacity: 0.6,
+      gradient: {
+	  0.45: "rgb(100,100,100)",
+	  0.55: "rgb(100,100,0)",
+	  0.65: "rgb(200,200,0)",
+	  0.95: "rgb(250,250,0)",
+	  1.0: "rgb(255,255,200)"
+      }
+  });
+  var uvLayer = L.TileLayer.heatMap({
+      radius: 20,
+      opacity: 0.6,
+      gradient: {
+	  0.45: "rgb(200,0,255)",
+	  0.55: "rgb(100,0,200)",
+	  0.65: "rgb(0,255,0)",
+	  0.95: "yellow",
+	  1.0: "rgb(255,0,0)"
+      }
+  });
+  var co2Layer = L.TileLayer.heatMap({
+      radius: 20,
+      opacity: 0.6,
+      gradient: {
+	  0.45: "rgb(0,50,0)",
+	  0.55: "rgb(0,100,0)",
+	  0.65: "rgb(0,155,0)",
+	  0.95: "rgb(0,200,0)",
+	  1.0: "rgb(0,250,0)"
 
-  heatmapLayer.addData(testData);
+      }
+  });
+  var noiseLayer = L.TileLayer.heatMap({
+      radius: 20,
+      opacity: 0.8,
+      gradient: {
+	  0.45: "rgb(20,0,0)",
+	  0.55: "rgb(60,0,0)",
+	  0.65: "rgb(100,0,0)",
+	  0.95: "rgb(130,0,0)",
+	  1.0: "rgb(200,0,0)"
+      }
+  });
 
+  heatmapLayer.addData(genrandata());
+  humidityLayer.addData(genrandata());
+  noiseLayer.addData(genrandata());
+  co2Layer.addData(genrandata());
+  lightLayer.addData(genrandata());
+  
   var overlayMaps = {
-      'Heatmap': heatmapLayer
+      'Temperature': heatmapLayer,
+      'Humidity' : humidityLayer,
+      'Light': lightLayer,
+      'UVLight': uvLayer,
+      'Noise': noiseLayer,
+      'CO2': co2Layer
   };
 
   var controls = L.control.layers(null, overlayMaps, {collapsed: false});
 
   var map = new L.Map('map', {
-      center: new L.LatLng(14.6, -90.55),
-      zoom: 13,
+      center: new L.LatLng(14.63, -90.5),
+      zoom: 12,
       layers: [baseLayer, heatmapLayer]
   });
 
