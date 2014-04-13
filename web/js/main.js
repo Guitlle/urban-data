@@ -124,7 +124,8 @@ $(function() {
   var map = new L.Map('map', {
       center: new L.LatLng(14.63, -90.5),
       zoom: 12,
-      layers: [baseLayer, heatmapLayer]
+      layers: [baseLayer, heatmapLayer],
+      scrollWheelZoom: false
   });
 
   controls.addTo(map);
