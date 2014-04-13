@@ -18,6 +18,6 @@ if __name__ == '__main__':
         #host = '127.0.0.1'
         host = '0.0.0.0'
 
-    app = Eve(auth=AppAuth)
+    app = Eve() #auth=AppAuth)
     app.run(host=host, port=port)
 
