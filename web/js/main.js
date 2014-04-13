@@ -127,7 +127,7 @@ $(function() {
       }
   });
 
-  heatmapLayer.addData(genrandata());
+//   heatmapLayer.addData(genrandata());
   humidityLayer.addData(genrandata());
   noiseLayer.addData(genrandata());
   co2Layer.addData(genrandata());
