@@ -14,19 +14,22 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/leaflet.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 
   <!-- Modernizr and RespondJS to support old browsers -->
   <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
-<body>
+<body class="loading">
   <!--[if lt IE 7]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+  <div class="load"></div>
 
   <!-- Wrap all page content here -->
   <div id="wrap">
 
     <header class="masthead">
+      <div class="logo-shadow"><img id="logo" src="img/logo.png"></div>
       <!-- The Map -->
       <div id="map"></div>
     </header>
@@ -172,7 +175,6 @@ For example:
   <script type="text/javascript" src="js/vendor/heatmap.js"></script>
   <script type="text/javascript" src="js/vendor/heatmap-leaflet.js"></script>
   <script type="text/javascript" src="js/vendor/QuadTree.js"></script>
-
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>

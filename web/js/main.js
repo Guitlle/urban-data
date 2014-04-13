@@ -150,7 +150,7 @@ $(function() {
       layers: [baseLayer, heatmapLayer],
       scrollWheelZoom: false
   });
-  
+
 //   $.ajax({url: 'http://198.199.98.147:5000/data_point', 
 // 	 success: function(data) 
 // 	 { 
@@ -174,8 +174,12 @@ $(function() {
 // 	   //console.log(tempData);
 // 	   heatmapLayer.addData(tempData);
 // 	   heatmapLayer.redraw();
+//         $('body').removeClass('loading');
+//         $('.load').delay(500).queue( function(next) {
+//         $(this).hide();
+//         next();
+
 // 	} });
-  
   controls.addTo(map);
 
   // make accessible for debugging
