@@ -28,7 +28,8 @@ $(function() {
   // initialize the map on the "map" div with a given center and zoom
   var map = L.map('map', {
       center: [51.505, -0.09],
-      zoom: 13
+      zoom: 13,
+      scrollWheelZoom: false
   });
   // add an OpenStreetMap tile layer
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
