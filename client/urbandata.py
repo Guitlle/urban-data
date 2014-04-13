@@ -4,8 +4,8 @@ import datetime
 
 Config = {
     'url' : 'http://198.199.98.147:5000/data_point',
-    'agent' : 'Default'
-    'user' : 'urbanuser',
+    'agent' : 'Default',
+    'user': 'urbanuser',
     'password' : 'urbankey' 
   }
 
@@ -21,7 +21,7 @@ def send(latitud, longitud, extra):
   headers = {'content-type': 'application/json'}
   
   properties = {
-    "agent": agent,
+    "agent": Config['agent'],
     "time":  datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT"),
     
   }
@@ -36,4 +36,4 @@ def send(latitud, longitud, extra):
     },
     "properties": properties
   }
-  r = requests.post(url, data=json.dumps(payload), headers=headers, auth=(user, password))
+  r = requests.post(Config['url'], data=json.dumps(payload), headers=headers, auth=(Config['user'], Config['password']))
