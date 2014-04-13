@@ -4,12 +4,39 @@ function genrandata() {
     testData.push({lat: Math.random()* 0.1 + 14.6 , lon: -90.55 + Math.random()*0.1, value: Math.random() });
   return testData;
 }
+
 var heatmapLayer;
+
+
+function refreshScreen() {
+  var navHeight = 52;
+  var winHeight = $(window).height()
+  var mapHeight = (winHeight - navHeight);
+
+  if (winHeight > 452) {
+    $('.masthead').height(mapHeight);
+    $('#map').height(mapHeight);
+  } else {
+    $('.masthead').height(452 - navHeight);
+    $('#map').height(452 - navHeight);
+  }
+}
+
+$(window).resize(function() {
+  refreshScreen();
+});
+
 $(function() {
+  refreshScreen();
+
   /* affix the navbar after scroll below header */
   $('#nav').affix({
     offset: {
-      top: $(window).height() - $('#nav').height()
+      top: function() {
+        /* as a function so it changes the affixtop dynamically */
+        var mapHeight = ($(window).height() - 52);
+        return ($(window).height() > 452) ? mapHeight : 400;
+      }
     }
   });
 
@@ -28,15 +55,10 @@ $(function() {
     $('body,html').animate({scrollTop:posi}, 700);
   });
 
-  var mapHeight = $(window).height() - $('#nav').height()
-  $('.masthead').height(mapHeight);
-  $('#map').height(mapHeight);
-
   // add an OpenStreetMap tile layer
   var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   });
-  
   heatmapLayer = L.TileLayer.heatMap({
       radius: 20,
       opacity: 0.6,
@@ -110,7 +132,7 @@ $(function() {
   noiseLayer.addData(genrandata());
   co2Layer.addData(genrandata());
   lightLayer.addData(genrandata());
-  
+
   var overlayMaps = {
       'Temperature': heatmapLayer,
       'Humidity' : humidityLayer,
