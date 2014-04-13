@@ -151,35 +151,37 @@ $(function() {
       scrollWheelZoom: false
   });
 
-//   $.ajax({url: 'http://198.199.98.147:5000/data_point', 
-// 	 success: function(data) 
-// 	 { 
-// 	   var tempData = [];
-// 	   var myLayer = L.geoJson().addTo(map);
-// 	   
-// 	   $.each(data._items, function (i,e) 
-// 	   {
-// 	     if (e.properties.temperature) 
-// 	     {
-// 	      tempData.push({ lat: e.geometry.coordinates[0], lon: e.geometry.coordinates[1], value: e.properties.temperature});
-// 	      var temp = e.geometry.coordinates[0];
-// 	      e.geometry.coordinates[0] = e.geometry.coordinates[1];
-// 	      e.geometry.coordinates[1] = temp;
-// 	      console.log(e);
-// 	      myLayer.addData(e);
-// 	     }
-// 	   });
-// 	   myLayer.addTo(map);
-// 	   console.log(map);
-// 	   //console.log(tempData);
-// 	   heatmapLayer.addData(tempData);
-// 	   heatmapLayer.redraw();
-//         $('body').removeClass('loading');
-//         $('.load').delay(500).queue( function(next) {
-//         $(this).hide();
-//         next();
 
-// 	} });
+  $.ajax({url: 'http://198.199.98.147:5000/data_point',
+	 success: function(data)
+	 {
+	   var tempData = [];
+	   var myLayer = L.geoJson().addTo(map);
+
+	   $.each(data._items, function (i,e)
+	   {
+	     if (e.properties.temperature)
+	     {
+	      tempData.push({ lat: e.geometry.coordinates[0], lon: e.geometry.coordinates[1], value: e.properties.temperature});
+	      var temp = e.geometry.coordinates[0];
+	      e.geometry.coordinates[0] = e.geometry.coordinates[1];
+	      e.geometry.coordinates[1] = temp;
+	      console.log(e);
+	      myLayer.addData(e);
+	     }
+	   });
+	   myLayer.addTo(map);
+	   console.log(map);
+	   //console.log(tempData);
+	   heatmapLayer.addData(tempData);
+	   heatmapLayer.redraw();
+
+     $('body').removeClass('loading');
+    $('.load').delay(500).queue( function(next) {
+        $(this).hide();
+        next();
+    });
+	} });
   controls.addTo(map);
 
   // make accessible for debugging
