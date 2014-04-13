@@ -4,11 +4,36 @@ function genrandata() {
     testData.push({lat: Math.random()* 0.1 + 14.6 , lon: -90.55 + Math.random()*0.1, value: Math.random() });
   return testData;
 }
+
+function refreshScreen() {
+  var navHeight = 52;
+  var winHeight = $(window).height()
+  var mapHeight = (winHeight - navHeight);
+
+  if (winHeight > 452) {
+    $('.masthead').height(mapHeight);
+    $('#map').height(mapHeight);
+  } else {
+    $('.masthead').height(452 - navHeight);
+    $('#map').height(452 - navHeight);
+  }
+}
+
+$(window).resize(function() {
+  refreshScreen();
+});
+
 $(function() {
+  refreshScreen();
+
   /* affix the navbar after scroll below header */
   $('#nav').affix({
     offset: {
-      top: $(window).height() - $('#nav').height()
+      top: function() {
+        /* as a function so it changes the affixtop dynamically */
+        var mapHeight = ($(window).height() - 52);
+        return ($(window).height() > 452) ? mapHeight : 400;
+      }
     }
   });
 
@@ -26,18 +51,6 @@ $(function() {
     var posi = $(link).offset().top;
     $('body,html').animate({scrollTop:posi}, 700);
   });
-
-  var mapHeight = $(window).height() - $('#nav').height()
-  $('.masthead').height(mapHeight);
-  $('#map').height(mapHeight);
-
-
-  // initialize the map on the "map" div with a given center and zoom
-  /*var map = L.map('map', {
-      center: [51.505, -0.09],
-      zoom: 13,
-      scrollWheelZoom: false
-  });*/
 
   // add an OpenStreetMap tile layer
   var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
