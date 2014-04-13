@@ -1,8 +1,9 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+  font-family: 'Roboto', sans-serif;
+}
 
 .masthead {
   min-height: 400px;
@@ -34,24 +35,19 @@
 
 #nav {
   width: 100%;
-  position:static;
-  top:-32px;
+  position: static;
+  top: -32px;
 }
 
 #nav.affix {
-   position: fixed;
-   top: 0;
-   z-index:10;
-  /* -webkit-transition: all .6s ease-in-out; */
-}
-
-#footer > .container {
-
+ position: fixed;
+ top: 0;
+ z-index: 10;
 }
 
 @media (min-width: 767px) {
   .navbar-nav.nav-justified > li{
-      float:none;
+      float: none;
   }
 }
 
@@ -61,43 +57,46 @@
 
 /* customize nav style */
 .navbar-custom {
-    background-color: #2e2e2e;
-	font-weight:700;
-    text-transform:uppercase;
-    border-width:0;
+  background-color: #575760;
+  text-transform: uppercase;
+  border-width: 0;
 }
 .navbar-custom  .navbar-nav>li>a {
-	color: #ddd;
+	color: #f2f2f2;
 }
 .navbar-custom  .dropdown-menu li>a:hover {
-	color: #eee;
+	color: #fff;
 }
-.navbar-custom  .navbar-nav li>a:hover, .navbar-nav li .open, .navbar-custom .navbar-nav .active a  {
-	background-color: #000;
+.navbar-custom  .navbar-nav li>a:hover {
+  background-color: #3f3f45;
+}
+.navbar-nav li .open,
+.navbar-custom .navbar-nav .active a,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+	background-color: #94d500;
+  color: #575760;
 }
 .navbar-custom .navbar-nav>.dropdown>a .caret {
-	border-top-color: #999;
-	border-bottom-color: #999;
+	border-top-color: #94d500;
+	border-bottom-color: #94d500;
 }
 
 .navbar-collapse.in { /*3.0.2 bug workaround*/
-    overflow-y: visible;
+  overflow-y: visible;
 }
 
 .navbar-toggle {
-	outline:0;
+	outline: 0;
 }
 
 .scroll-top {
-   position:fixed;
-   bottom:0;
-   right:6%;
-   z-index:100;
-   background: #f2f3f2;
-   font-size:24px;
-   border-top-left-radius:3px;
-   border-top-right-radius:3px;
-}
-.scroll-top a:link,.scroll-top a:visited {
-  color:#222;
+ position: fixed;
+ bottom: 0;
+ right: 6%;
+ z-index: 100;
+ background: #f2f3f2;
+ font-size: 24px;
+ border-top-left-radius: 3px;
+ border-top-right-radius :3px;
 }
