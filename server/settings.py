@@ -30,7 +30,7 @@ MONGO_DBNAME = 'urban'
 X_DOMAINS = '*'
 PAGINATION_DEFAULT=1000
 PAGINATION_LIMIT=2000
-X_HEADERS = ['Authorization', 'Content-Type']
+X_HEADERS = ['Authorization', 'Content-Type', 'Access-Control-Allow-Origin']
 DATE_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
 # let's not forget the API entry point (not really needed anyway)
 #SERVER_NAME = '127.0.0.1:5000'
