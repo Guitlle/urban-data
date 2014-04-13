@@ -1,5 +1,6 @@
 import os
 from eve import Eve
+from eve.auth import BasicAuth
 
 class AppAuth(BasicAuth): 
     def check_auth(self, username, password, allowed_roles, resource, method):
