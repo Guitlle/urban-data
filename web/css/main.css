@@ -28,6 +28,18 @@ body.loading .load{
 
 .masthead {
   min-height: 400px;
+  position: relative;
+}
+
+.loading .logo-shadow {
+  background-color: transparent;
+}
+.logo-shadow {
+  background-color: rgba(0,0,0,0.75);
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
 }
 
 .divider {
