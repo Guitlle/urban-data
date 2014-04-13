@@ -156,8 +156,8 @@ $(function() {
 	 success: function(data)
 	 {
 	   var tempData = [];
-	   var myLayer = L.geoJson().addTo(map);
 
+	  var tempgeo = [];
 	   $.each(data._items, function (i,e)
 	   {
 	     if (e.properties.temperature)
@@ -166,13 +166,20 @@ $(function() {
 	      var temp = e.geometry.coordinates[0];
 	      e.geometry.coordinates[0] = e.geometry.coordinates[1];
 	      e.geometry.coordinates[1] = temp;
-	      console.log(e);
-	      myLayer.addData(e);
+	      tempgeo.push(e);
 	     }
 	   });
-	   myLayer.addTo(map);
-	   console.log(map);
-	   //console.log(tempData);
+	   var myLayer = L.geoJson(tempgeo, 
+	    {
+	      onEachFeature:function (feature, layer) {
+		  // does this feature have a property named popupContent?
+		  
+		  if (feature.properties && feature.properties.temperature) {
+		      layer.bindPopup("<strong>Temperature</strong>: "+feature.properties.temperature+" C <br>");
+		  }
+	      }
+	    }
+	  ).addTo(map);
 	   heatmapLayer.addData(tempData);
 	   heatmapLayer.redraw();
 
