@@ -209,7 +209,7 @@ $(function () {
   /* put the small logo */
   var smallHidden = true;
   $(window).scroll(function () {
-    if ($(window).height() < $(window).scrollTop()-10) {
+    if ($(window).height() < $(window).scrollTop()+30) {
       if (smallHidden) {
         $('#small-logo').removeClass('hide');
         $('#logo').addClass('hide');
@@ -253,7 +253,11 @@ $(function () {
     $('body,html').animate({scrollTop:posi}, 700);
   });
 
-  var map = L.mapbox.map('map', 'elguille.i059n18d', {scrollWheelZoom: false})
+  var map = L.mapbox.map('map', 'elguille.i059n18d', 
+    {
+      scrollWheelZoom: false,
+      infoControl: false
+    })
     .setView([14.604698, -90.489502], 15);
 
   $('body').removeClass('loading');
