@@ -18,6 +18,7 @@ function simpleheat(canvas) {
 
     this._max = 1;
     this._data = [];
+    this._opacity = 1;
 }
 
 simpleheat.prototype = {
@@ -39,6 +40,11 @@ simpleheat.prototype = {
 
     max: function (max) {
         this._max = max;
+        return this;
+    },
+
+    opacity: function (opacity) {
+        this._opacity = opacity;
         return this;
     },
 
@@ -130,6 +136,7 @@ simpleheat.prototype = {
                 pixels[i - 3] = gradient[j];
                 pixels[i - 2] = gradient[j + 1];
                 pixels[i - 1] = gradient[j + 2];
+                pixels[i] = pixels[i]*this._opacity;
             }
         }
     }
