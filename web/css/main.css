@@ -48,7 +48,7 @@ body.loading .load{
   left: -50px;
 }
 .divider {
-  height: 500px;
+  height: 100px;
 }
 
 /* Wrapper for page content to push down footer */
@@ -181,3 +181,10 @@ body.loading .load{
   cursor:pointer;
 }
 
+/* ******** Content ******** */
+h1 {
+  color: #318fb5;
+  font-weight: bold;
+  font-family: Helvetica;
+  font-size:70px;
+}
