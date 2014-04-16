@@ -31,17 +31,26 @@ body.loading .load{
   position: relative;
 }
 
-.loading .logo-shadow {
-  background-color: transparent;
-}
-.logo-shadow {
-  background-color: rgba(0,0,0,0.75);
+#logo {
+  background-color: #575760;
   position: absolute;
-  left: 20px;
-  bottom: 20px;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 75px;
   z-index: 1000;
 }
-
+#logo img {
+  position:relative;
+  top: -45px;
+}
+#small-logo {
+  position:relative;
+}
+#small-logo img {
+  position:absolute;
+  left: -50px;
+}
 .divider {
   height: 500px;
 }
@@ -107,12 +116,11 @@ body.loading .load{
 .navbar-custom .navbar-nav .active a,
 .navbar-inverse .navbar-nav>.active>a:hover,
 .navbar-inverse .navbar-nav>.active>a:focus {
-	background-color: #94d500;
-  color: #575760;
+	background-color: #318fb5;
 }
 .navbar-custom .navbar-nav>.dropdown>a .caret {
-	border-top-color: #94d500;
-	border-bottom-color: #94d500;
+	border-top-color: #318fb5;
+	border-bottom-color: #318fb5;
 }
 
 .navbar-collapse.in { /*3.0.2 bug workaround*/
