@@ -141,3 +141,21 @@ body.loading .load{
  border-top-left-radius: 3px;
  border-top-right-radius :3px;
 }
+
+/* ****** Side panel ******* */
+
+#sidepanel {
+  position:absolute;
+  right: -245px;
+  width: 260px;
+  height: 100%;
+  background: url(../img/side-panel-bg.png) repeat-y;
+}
+#sidepanel .container {
+  position:relative;
+} 
+#toggle_panel {
+  position:absolute;
+  top:0px;
+  left: -21px;
+}

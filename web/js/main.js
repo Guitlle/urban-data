@@ -5,9 +5,6 @@ function genrandata() {
   return testData;
 }
 
-var heatmapLayer;
-
-
 function refreshScreen() {
   var navHeight = 52;
   var winHeight = $(window).height()
@@ -20,6 +17,17 @@ function refreshScreen() {
     $('.masthead').height(452 - navHeight);
     $('#map').height(452 - navHeight);
   }
+}
+
+function toggleSidePanel() {
+  if ($("#sidepanel").css("right") == "-5px")
+    $("#sidepanel").animate({
+      "right": -245
+    }, 600);
+  else 
+    $("#sidepanel").animate({
+      "right": -5
+    }, 600);
 }
 
 $(window).resize(function() {
@@ -249,4 +257,7 @@ $(function () {
       $(this).hide();
       next();
   });
+
+  /* Side panel */
+  $("#toggle_panel").click(toggleSidePanel);
 });
