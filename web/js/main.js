@@ -1,7 +1,7 @@
 function genrandata() {
   var testData = [];
   for (var i = 0; i < 200; i++)
-    testData.push([ Math.random()* 0.06 + 14.6 , -90.55 + Math.random()*0.1,  Math.random() ]);
+    testData.push([ Math.random()* 0.09 + 14.6 , -90.55 + Math.random()*0.18,  Math.random() ]);
   return testData;
 }
 
@@ -260,7 +260,7 @@ $(function () {
       scrollWheelZoom: false,
       infoControl: false
     })
-    .setView([14.604698, -90.489502], 15);
+    .setView([14.62, -90.5], 14);
 
   // the heat layer
   var heatmap = L.heatLayer(genrandata(), {
