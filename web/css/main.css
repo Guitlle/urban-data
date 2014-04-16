@@ -3,6 +3,7 @@
    ========================================================================== */
 body {
   font-family: 'Roboto', sans-serif;
+  background: url(../img/bg.jpg) repeat;
 }
 
 .load {
@@ -136,6 +137,9 @@ body.loading .load{
   height: 30px;
   margin: 10px;
 }
+.social-icon:hover  {
+  text-decoration: none;
+}
 .social-fb {
   background-position-x: 60px;
 }
@@ -173,5 +177,6 @@ body.loading .load{
   position:absolute;
   top:0px;
   left: -21px;
+  cursor:pointer;
 }
 
