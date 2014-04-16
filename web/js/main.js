@@ -1,7 +1,7 @@
 function genrandata() {
   var testData = [];
   for (var i = 0; i < 200; i++)
-    testData.push({lat: Math.random()* 0.06 + 14.6 , lon: -90.55 + Math.random()*0.1, value: Math.random() });
+    testData.push([ Math.random()* 0.06 + 14.6 , -90.55 + Math.random()*0.1,  Math.random() ]);
   return testData;
 }
 
@@ -204,6 +204,8 @@ $(window).resize(function() {
 // });
 
 $(function () {
+  'use strict';
+
   refreshScreen();
 
   /* put the small logo */
@@ -259,6 +261,14 @@ $(function () {
       infoControl: false
     })
     .setView([14.604698, -90.489502], 15);
+
+  // the heat layer
+  var heatmap = L.heatLayer(genrandata(), {
+         maxZoom: 18,
+         radius: 20,
+         blur: 19
+    }).addTo(map),
+        draw = true;
 
   $('body').removeClass('loading');
   $('.load').delay(500).queue( function(next) {
