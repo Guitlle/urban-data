@@ -75,6 +75,10 @@ body.loading .load{
   z-index: 10;
 }
 
+#menubar ul {
+  margin-right: 200px;
+}
+
 #nav {
   width: 100%;
   position: static;
@@ -131,6 +135,23 @@ body.loading .load{
 	outline: 0;
 }
 
+.social-icon  {
+  background-image: url(../img/social-icons.png);
+  background-position-y: 0px;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+.social-fb {
+  background-position-x: 60px;
+}
+.social-gh {
+  background-position-x: 0px;
+}
+.social-tw {
+  background-position-x: 30px;
+}
+
 .scroll-top {
  position: fixed;
  bottom: 0;
@@ -159,3 +180,4 @@ body.loading .load{
   top:0px;
   left: -21px;
 }
+
