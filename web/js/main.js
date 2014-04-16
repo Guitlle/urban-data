@@ -264,6 +264,7 @@ $(function () {
 
   // the heat layer
   var heatmap = L.heatLayer(genrandata(), {
+         opacity: 0.5,
          maxZoom: 18,
          radius: 20,
          blur: 19
