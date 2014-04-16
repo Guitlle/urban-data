@@ -5,6 +5,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background: url(../img/bg.jpg) repeat;
   color: #808080;
+  font-size: 15px;
 }
 
 .load {
@@ -195,4 +196,33 @@ h1 {
   height: 700px;
   float:left;
   margin-top:100px;
+  color:white;
+  font-weight:bold;
+  font-size: 18px;
+  text-align: justify;
+}
+
+#how-description .top {
+  width: 300px;
+  height: 300px;
+  margin-left: 90px;
+  margin-top: 30px;
+}
+
+#how-description .bottom {
+  width: 300px;
+  margin-left: 90px;
+  margin-top: 120px;  
+}
+
+.big{
+  font-size: 26px;
+  margin: 2em;
+}
+.huge-heart {
+  display: block;
+  font-size: 380px;
+  float:right;
+  margin: 0px 60px;
+  color: #b43;
 }
