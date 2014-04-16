@@ -212,12 +212,16 @@ $(function () {
     if ($(window).height() < $(window).scrollTop()-10) {
       if (smallHidden) {
         $('#small-logo').removeClass('hide');
+        $('#logo').addClass('hide');
+
         smallHidden = false;
       }
     }
     else {
       if (!smallHidden) {
         $('#small-logo').addClass('hide');
+        $('#logo').removeClass('hide');
+
         smallHidden = true;
       }
     }
