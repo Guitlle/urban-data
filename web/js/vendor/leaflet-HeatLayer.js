@@ -147,7 +147,7 @@ L.HeatLayer = L.Class.extend({
                     max = this._latlngs[i][2];
             }
         }
-        var range = max-min, offset = min;
+        var range = max-min, offset = min, plain = false;
         // unlikely situation
         if (range == 0) {
             plain = true;
