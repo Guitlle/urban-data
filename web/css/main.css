@@ -226,3 +226,11 @@ h1 {
   margin: 0px 60px;
   color: #b43;
 }
+
+/* ********* Footer ******** */
+#footer {
+  background: #ddd;
+  color:#444;
+  padding: 80px 10px;
+  text-align: center;
+}
