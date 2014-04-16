@@ -4,6 +4,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background: url(../img/bg.jpg) repeat;
+  color: #808080;
 }
 
 .load {
