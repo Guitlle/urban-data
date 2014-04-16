@@ -188,3 +188,11 @@ h1 {
   font-family: Helvetica;
   font-size:70px;
 }
+
+#how-description {
+  background: url(../img/how-03.png);
+  width: 261px;
+  height: 300px;
+  float:left;
+  margin:1em;
+}
