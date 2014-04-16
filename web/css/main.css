@@ -191,8 +191,8 @@ h1 {
 
 #how-description {
   background: url(../img/how-03.png);
-  width: 261px;
-  height: 300px;
+  width: 500px;
+  height: 700px;
   float:left;
-  margin:1em;
+  margin-top:100px;
 }
