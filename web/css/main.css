@@ -29,6 +29,7 @@ body.loading .load{
 .masthead {
   min-height: 400px;
   position: relative;
+  overflow:hidden;
 }
 
 #logo {
