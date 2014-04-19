@@ -13,11 +13,11 @@ function genrandata() {
           humidity: Math.random(),
           noise: Math.random(),
           co2: Math.random(),
-          light: Math.random(),
+          sunlight: Math.random(),
           uvlight: Math.random()
         }
       });
-  return testData;
+  return {_items: testData};
 }
 
 function refreshScreen() {
@@ -207,16 +207,23 @@ function urbanmap () {
       }
   });
   
-  // replace this with 
-  // var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
-  var dataPromise = new $.Deferred(); 
-  dataPromise.resolve(genrandata());
+  // Real or fake data. 
+  var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
+  // var dataPromise = new $.Deferred(); 
+  // dataPromise.resolve(genrandata());
 
-  dataPromise.then(function (data) {
-    var feature;
+  dataPromise.then(function (response) {
+    var feature, data = response._items;
     for (var i = 0; i < data.length; i ++) {
+      
       feature = data[i];
-      console.log(feature);
+
+      // TODO fix this
+      temp = feature.geometry.coordinates[0];
+      feature.geometry.coordinates[0] = feature.geometry.coordinates[1];
+      feature.geometry.coordinates[1] = temp;
+      // *******************
+
       L.geoJson(feature, {
         onEachFeature: function (feature, layer) {
           ;
@@ -233,9 +240,9 @@ function urbanmap () {
         heatmap.addLatLng(new L.latLng(
           [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.temperature] 
           ));
-      if (feature.properties.light)
+      if (feature.properties.sunlight)
         lightLayer.addLatLng(new L.latLng(
-          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.light] 
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.sunlight] 
           ));
       if (feature.properties.uvlight)
         uvLayer.addLatLng(new L.latLng(
