@@ -123,23 +123,35 @@ function urbanmap () {
   //         "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
   //     ]
   // };
+  // var geojsonMarkerOptions = {
+  //   radius: 8,
+  //   fillColor: "#449",
+  //   color: "#000",
+  //   weight: 1,
+  //   opacity: 0.7,
+  //   fillOpacity: 0.1
+  // };
+  var urbanmarker = L.icon({
+    iconUrl: 'img/urbanmarker.png',
+    iconAnchor: L.point(16,32)
+  });
 
   map.addLayer(L.mapbox.tileLayer(tilejson));
-  
+  map.addControl(L.mapbox.legendControl());
   // the heat layer
-  var heatmap = L.heatLayer(genrandata(), {
+  var heatmap = L.heatLayer([], {
          opacity: 0.5,
          radius: 20,
          blur: 19
     }).addTo(map);
 
-  var humidityLayer = L.heatLayer(genrandata(),{
+  var humidityLayer = L.heatLayer([],{
       radius: 20,
       opacity: 0.8,
       blur: 19,
       gradient: { 0.4: "gray", 0.7: "rgb(200,200,255)" }
   });
-  var lightLayer = L.heatLayer(genrandata(), {
+  var lightLayer = L.heatLayer([], {
       radius: 20,
       opacity: 0.5,
       blur: 19,
@@ -151,7 +163,7 @@ function urbanmap () {
          1.0: "rgb(255,255,200)"
       }
   });
-  var uvLayer = L.heatLayer(genrandata(), {
+  var uvLayer = L.heatLayer([], {
       radius: 20,
       opacity: 0.5,
       blur: 19,
@@ -159,7 +171,7 @@ function urbanmap () {
          0.65: "rgb(100,100,100)", 0.8: "rgb(210,0,230)"
       }
   });
-  var co2Layer = L.heatLayer(genrandata(), { 
+  var co2Layer = L.heatLayer([], { 
       radius: 20,
       opacity: 0.5,
       blur: 19,
@@ -169,7 +181,7 @@ function urbanmap () {
          1.0: "rgb(255,0,0)"
       }
   });
-  var noiseLayer = L.heatLayer(genrandata(), {
+  var noiseLayer = L.heatLayer([], {
       radius: 20,
       opacity: 0.5,
       blur: 19,
@@ -179,7 +191,46 @@ function urbanmap () {
         1.0: "rgb(0,0,0)"
       }
   });
+  
+  // replace this with 
+  // var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
+  var dataPromise = new $.Deferred(); 
+  dataPromise.resolve(genrandata());
 
+  dataPromise.then(function (data) {
+    var feature;
+    for (var i = 0; i < data.length; i ++) {
+      // feature = data[i];
+      feature = {
+        geometry: {
+          coordinates: [data[i][1], data[i][0]],
+          type: "Point"
+        },
+        type: "Feature",
+        properties: {
+          temperature:  data[i][2],
+          humidity: data[i][2]
+        }
+      };
+
+      L.geoJson(feature, {
+        onEachFeature: function (feature, layer) {
+          ;
+        },
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {icon: urbanmarker});
+        }
+      }).addTo(map);
+      if (feature.properties.humidity) 
+        humidityLayer.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.humidity] 
+          ));  
+      if (feature.properties.temperature)
+        heatmap.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.temperature] 
+          ));
+    }
+  });
 
   var overlayMaps = {
       'Temperature': heatmap,
