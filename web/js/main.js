@@ -1,7 +1,22 @@
 function genrandata() {
   var testData = [];
-  for (var i = 0; i < 200; i++)
-    testData.push([ Math.random()* 0.09 + 14.6 , -90.55 + Math.random()*0.18,  Math.random() ]);
+  for (var i = 0; i < 100; i++)
+    testData.push(
+      {
+        geometry: {
+          coordinates: [-90.55 + Math.random()*0.28, Math.random()* 0.19 + 14.6],
+          type: "Point"
+        },
+        type: "Feature",
+        properties: {
+          temperature:  Math.random(),
+          humidity: Math.random(),
+          noise: Math.random(),
+          co2: Math.random(),
+          light: Math.random(),
+          uvlight: Math.random()
+        }
+      });
   return testData;
 }
 
@@ -149,7 +164,7 @@ function urbanmap () {
       radius: 20,
       opacity: 0.8,
       blur: 19,
-      gradient: { 0.4: "gray", 0.7: "rgb(200,200,255)" }
+      gradient: { 0.1: "black", 0.8: "rgb(200,200,255)", 1.0: "white" }
   });
   var lightLayer = L.heatLayer([], {
       radius: 20,
@@ -200,19 +215,8 @@ function urbanmap () {
   dataPromise.then(function (data) {
     var feature;
     for (var i = 0; i < data.length; i ++) {
-      // feature = data[i];
-      feature = {
-        geometry: {
-          coordinates: [data[i][1], data[i][0]],
-          type: "Point"
-        },
-        type: "Feature",
-        properties: {
-          temperature:  data[i][2],
-          humidity: data[i][2]
-        }
-      };
-
+      feature = data[i];
+      console.log(feature);
       L.geoJson(feature, {
         onEachFeature: function (feature, layer) {
           ;
@@ -228,6 +232,22 @@ function urbanmap () {
       if (feature.properties.temperature)
         heatmap.addLatLng(new L.latLng(
           [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.temperature] 
+          ));
+      if (feature.properties.light)
+        lightLayer.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.light] 
+          ));
+      if (feature.properties.uvlight)
+        uvLayer.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.uvlight] 
+          ));
+      if (feature.properties.noise)
+        noiseLayer.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.noise] 
+          ));
+      if (feature.properties.co2)
+        co2Layer.addLatLng(new L.latLng(
+          [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.co2] 
           ));
     }
   });
