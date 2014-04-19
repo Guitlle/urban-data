@@ -41,6 +41,12 @@ body.loading .load{
   bottom: -10px;
   z-index: 1000;
 }
+@media (max-width: 400px) {
+  #logo {
+    width: 90px;
+    height:90px;
+  }
+}
 #small-logo {
   position:relative;
 }
