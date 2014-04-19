@@ -22,3 +22,14 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+$(function () {
+    $(".icon-checkbox").click(function () {
+        if ($(this).data("checked")) {
+            $(this).data("checked",false);
+            $(this).find("i.glyphicon").removeClass("glyphicon-check").addClass("glyphicon-unchecked");
+        } else {
+            $(this).data("checked",true);
+            $(this).find("i.glyphicon").removeClass("glyphicon-unchecked").addClass("glyphicon-check"); 
+        }
+    });
+});

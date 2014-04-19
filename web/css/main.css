@@ -183,7 +183,7 @@ body.loading .load{
 #toggle_panel {
   position:absolute;
   top:0px;
-  left: -21px;
+  left: -17px;
   cursor:pointer;
 }
 
@@ -238,4 +238,12 @@ h1 {
   color:#444;
   padding: 80px 10px;
   text-align: center;
+}
+
+/* ******** Custom checkbox ******* */
+.slider-label {
+  width: 120px;
+}
+.icon-checkbox{ 
+  margin:5px;
 }

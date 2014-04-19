@@ -172,9 +172,8 @@ function urbanmap () {
       'CO2': co2Layer
   };
 
-  $('.overlay_select').change(function (){
-    console.log($(this).val());
-    if ($(this).is(":checked"))
+  $('.icon-checkbox').click(function (){
+    if ($(this).data("checked"))
       overlayMaps[$(this).data('overlay_map')].addTo(map);
     else 
       map.removeLayer(overlayMaps[$(this).data('overlay_map')]);
