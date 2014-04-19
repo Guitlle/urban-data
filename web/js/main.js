@@ -4,7 +4,7 @@ function genrandata() {
     testData.push(
       {
         geometry: {
-          coordinates: [-90.55 + Math.random()*0.28, Math.random()* 0.19 + 14.6],
+          coordinates: [Math.random()* 0.19 + 14.6, -90.55 + Math.random()*0.28],
           type: "Point"
         },
         type: "Feature",
@@ -99,12 +99,6 @@ $(function () {
     var link = $(this).attr('href');
     var posi = $(link).offset().top;
     $('body,html').animate({scrollTop:posi}, 700);
-  });
-
-  $('body').removeClass('loading');
-  $('.load').delay(500).queue( function(next) {
-      $(this).hide();
-      next();
   });
 
   /* Side panel */
@@ -206,19 +200,44 @@ function urbanmap () {
         1.0: "rgb(0,0,0)"
       }
   });
-  
+
+  var overlayMaps = {
+      'Temperature': heatmap,
+      'Humidity' : humidityLayer,
+      'Light': lightLayer,
+      'UVLight': uvLayer,
+      'Noise': noiseLayer,
+      'CO2': co2Layer
+  };
+
+  $('.icon-checkbox').click(function (){
+    if ($(this).data("checked"))
+      overlayMaps[$(this).data('overlay_map')].addTo(map);
+    else 
+      map.removeLayer(overlayMaps[$(this).data('overlay_map')]);
+  });
+
   // Real or fake data. 
-  var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
-  // var dataPromise = new $.Deferred(); 
-  // dataPromise.resolve(genrandata());
+  //var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
+  var dataPromise = new $.Deferred(); 
+  dataPromise.resolve(genrandata());
 
   dataPromise.then(function (response) {
+    // hide the loading
+    $('body').removeClass('loading');
+    $('.load').delay(500).queue( function(next) {
+        $(this).hide();
+        next();
+    });
+
+    // iterate over the geojson response
     var feature, data = response._items;
     for (var i = 0; i < data.length; i ++) {
       
       feature = data[i];
 
-      // TODO fix this
+      // TODO fix this.
+      // swap coordinates
       temp = feature.geometry.coordinates[0];
       feature.geometry.coordinates[0] = feature.geometry.coordinates[1];
       feature.geometry.coordinates[1] = temp;
@@ -226,7 +245,7 @@ function urbanmap () {
 
       L.geoJson(feature, {
         onEachFeature: function (feature, layer) {
-          ;
+          map.addControl(L.mapbox.legendControl("<div><h3>Raspi X</h3> Temperature : 23.43 C</div>"));
         },
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: urbanmarker});
@@ -259,19 +278,4 @@ function urbanmap () {
     }
   });
 
-  var overlayMaps = {
-      'Temperature': heatmap,
-      'Humidity' : humidityLayer,
-      'Light': lightLayer,
-      'UVLight': uvLayer,
-      'Noise': noiseLayer,
-      'CO2': co2Layer
-  };
-
-  $('.icon-checkbox').click(function (){
-    if ($(this).data("checked"))
-      overlayMaps[$(this).data('overlay_map')].addTo(map);
-    else 
-      map.removeLayer(overlayMaps[$(this).data('overlay_map')]);
-  })
 }
