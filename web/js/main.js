@@ -9,7 +9,7 @@ function genrandata() {
         },
         type: "Feature",
         properties: {
-          name: "UrbanRaspi V0.1",
+          agent: "UrbanRaspi V0.1",
           temperature:  Math.random(),
           humidity: Math.random(),
           noise: Math.random(),
@@ -267,7 +267,7 @@ function urbanmap () {
             selectedMarker = ev.originalEvent.target;
             ev.originalEvent.target.src = "img/urbanmarker_highlighted.png";
 
-            var info = "<h4>Station information <br/> ("+feature.properties.name+")</h4>";
+            var info = "<h4>Station information <br/> ("+feature.properties.agent+")</h4>";
             if (feature.properties.temperature)
               info += "<strong>Temperature: </strong><span class='property'>"+ feature.properties.temperature.toFixed(2)+" &deg;C</span> <br />";  
             if (feature.properties.humidity)
@@ -292,10 +292,10 @@ function urbanmap () {
               
               $(selectedMarker).popover({
                   html: true,
-                  title: 'Station Information ('+feature.properties.name+')',
                   content: info, 
                   container: 'body',
-                  trigger: 'manual'
+                  trigger: 'manual',
+                  class: 'small-popover'
               }).popover('show');
 
             }
