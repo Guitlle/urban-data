@@ -183,8 +183,10 @@ body.loading .load{
   color:white;
   font-size: 80%;
 }
-#sidepanel > div {
-  padding: 20px 40px;
+#sidepanel > .container {
+  padding-left: 30px;
+  padding-top: 20px;
+  width: 100%;
 }
 #sidepanel .container {
   position:relative;
@@ -195,7 +197,21 @@ body.loading .load{
   left: -17px;
   cursor:pointer;
 }
-
+#sidepanel .feature {
+  font-size: 13px;
+  padding: 10px;
+  margin-top:2em;
+  background: #445;
+}
+.feature .property {
+  color: #bef;
+  font-weight: bold;
+  font-size: 14px;
+  padding-left: 10px;
+}
+.slider-label {
+  width: 150px;
+}
 /* ******** Content ******** */
 h1 {
   color: #318fb5;
@@ -262,9 +278,6 @@ h1 {
 }
 
 /* ******** Custom checkbox ******* */
-.slider-label {
-  width: 120px;
-}
 .icon-checkbox{ 
   margin:5px;
 }

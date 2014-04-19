@@ -9,6 +9,7 @@ function genrandata() {
         },
         type: "Feature",
         properties: {
+          name: "UrbanRaspi V0.1",
           temperature:  Math.random(),
           humidity: Math.random(),
           noise: Math.random(),
@@ -34,8 +35,8 @@ function refreshScreen() {
   }
 }
 
-function toggleSidePanel() {
-  if ($("#sidepanel").css("right") == "-5px")
+function toggleSidePanel(event,show) {
+  if (!show && $("#sidepanel").css("right") == "-5px")
     $("#sidepanel").animate({
       "right": -245
     }, 600);
@@ -218,9 +219,10 @@ function urbanmap () {
   });
 
   // Real or fake data. 
-  //var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
+  // var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
   var dataPromise = new $.Deferred(); 
   dataPromise.resolve(genrandata());
+  this.map = map;
 
   dataPromise.then(function (response) {
     // hide the loading
@@ -244,11 +246,25 @@ function urbanmap () {
       // *******************
 
       L.geoJson(feature, {
-        onEachFeature: function (feature, layer) {
-          map.addControl(L.mapbox.legendControl("<div><h3>Raspi X</h3> Temperature : 23.43 C</div>"));
-        },
         pointToLayer: function (feature, latlng) {
-          return L.marker(latlng, {icon: urbanmarker});
+          return L.marker(latlng, {icon: urbanmarker}).on('click', function (ev){
+            var info = "<h4>Station information <br/> ("+feature.properties.name+")</h4>";
+            if (feature.properties.temperature)
+              info += "<strong>Temperature: </strong><span class='property'>"+ feature.properties.temperature.toFixed(2)+" &deg;C</span> <br />";  
+            if (feature.properties.humidity)
+              info += "<strong>Relative humidity: </strong><span class='property'> "+ feature.properties.humidity.toFixed(2)+" RH%</span> <br />";  
+            if (feature.properties.sunlight)
+              info += "<strong>Light intensity: </strong><span class='property'> "+ feature.properties.sunlight.toFixed(2)+" cd</span> <br />";
+            if (feature.properties.noise)
+              info += "<strong>Noise level: </strong><span class='property'> "+ feature.properties.noise.toFixed(2)+" dB</span> <br />";
+
+            if ($(window).height() > 550) {
+              toggleSidePanel(null, true);
+              $("#featureInfo").html(info);
+            } else {
+              // TODO: 
+            }
+          });
         }
       }).addTo(map);
       if (feature.properties.humidity) 
