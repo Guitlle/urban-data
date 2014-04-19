@@ -101,13 +101,31 @@ $(function () {
 /* test function to initilize and handle the map */
 /* TODO: put this into a nice class with a better structure */
 function urbanmap () {
-  var map = L.mapbox.map('map', 'elguille.i059n18d', 
-  {
+  var map = L.map('map', {
     scrollWheelZoom: false,
     infoControl: false
   })
   .setView([14.62, -90.48], 14);
 
+  var tilejson = 'elguille.i059n18d';
+
+  // OSM tilejson
+  // var tilejson = {
+  //     "tilejson": "2.0.0",
+  //     "name": "OpenStreetMap",
+  //     "description": "A free editable map of the whole world.",
+  //     "version": "1.0.0",
+  //     "attribution": "&copy; OpenStreetMap contributors, CC-BY-SA",
+  //     "scheme": "xyz",
+  //     "tiles": [
+  //         "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  //         "http://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  //         "http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  //     ]
+  // };
+
+  map.addLayer(L.mapbox.tileLayer(tilejson));
+  
   // the heat layer
   var heatmap = L.heatLayer(genrandata(), {
          opacity: 0.5,
