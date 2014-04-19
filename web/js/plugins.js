@@ -22,6 +22,22 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+
+// Custom checkbox that uses glyphicons.
+// The html would look like this:
+// <div class="icon-checkbox btn-group" data-checked="True" data-overlay_map="Temperature">
+//   <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-check"></i></button>
+//   <button type="button" class="btn btn-default disabled slider-label">Temperature</button>
+// </div>
+// The check listener would like : 
+// $("#mycheckbox").click(function () {
+//      if ($(this).data("checked")) {
+//          do something;
+//      else {
+//          do something;
+//      }
+// });
+
 $(function () {
     $(".icon-checkbox").click(function () {
         if ($(this).data("checked")) {
@@ -30,6 +46,16 @@ $(function () {
         } else {
             $(this).data("checked",true);
             $(this).find("i.glyphicon").removeClass("glyphicon-unchecked").addClass("glyphicon-check"); 
+        }
+    });
+});
+
+$('body').on('click', function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
         }
     });
 });

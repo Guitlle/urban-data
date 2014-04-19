@@ -114,11 +114,13 @@ function urbanmap () {
   'use strict';
   var map = L.map('map', {
     scrollWheelZoom: false,
-    infoControl: false
+    infoControl: false,
+    attributionControl: false
   })
   .setView([14.62, -90.48], 14);
 
   var tilejson = 'elguille.i059n18d';
+  var selectedMarker = null, popmarker = null;
 
   // OSM tilejson
   // var tilejson = {
@@ -144,10 +146,11 @@ function urbanmap () {
   // };
   var urbanmarker = L.icon({
     iconUrl: 'img/urbanmarker.png',
-    iconAnchor: L.point(16,32)
+    iconAnchor: L.point(16,32),
+    className: 'urban-marker'
   });
 
-  map.addLayer(L.mapbox.tileLayer(tilejson));
+  map.addLayer(L.mapbox.tileLayer(tilejson, {attributionControl: false}));
   map.addControl(L.mapbox.legendControl());
   // the heat layer
   var heatmap = L.heatLayer([], {
@@ -183,7 +186,7 @@ function urbanmap () {
       }
   });
   var co2Layer = L.heatLayer([], { 
-      radius: 20,
+       radius: 20,
       opacity: 0.5,
       blur: 19,
       gradient: {
@@ -212,6 +215,7 @@ function urbanmap () {
       'CO2': co2Layer
   };
 
+  // handle layer selectors checkboxes
   $('.icon-checkbox').click(function (){
     if ($(this).data("checked"))
       overlayMaps[$(this).data('overlay_map')].addTo(map);
@@ -219,6 +223,13 @@ function urbanmap () {
       map.removeLayer(overlayMaps[$(this).data('overlay_map')]);
   });
 
+  // hide popovers
+  $('#map').on('click', function (e) {
+    if( !$(this).is(popmarker) ) {
+      $(popmarker).popover('hide');
+      popmarker = null;
+    }      
+  });
   // Real or fake data. 
   var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
   // var dataPromise = new $.Deferred(); 
@@ -234,7 +245,6 @@ function urbanmap () {
 
     // iterate over the geojson response
     var temp, feature, data = response._items;
-    var selectedMarker = null;
     for (var i = 0; i < data.length; i ++) {
       
       feature = data[i];
@@ -272,7 +282,22 @@ function urbanmap () {
               toggleSidePanel(null, true);
               $("#featureInfo").html(info);
             } else {
-              // TODO: show a popup instead ? 
+              // hide previous popover
+              if (popmarker) {
+                  $(popmarker).popover('hide');
+              }
+              // dont show it again
+              if (popmarker == selectedMarker) return;
+              popmarker = selectedMarker;
+              
+              $(selectedMarker).popover({
+                  html: true,
+                  title: 'Station Information ('+feature.properties.name+')',
+                  content: info, 
+                  container: 'body',
+                  trigger: 'manual'
+              }).popover('show');
+
             }
           });
         }
