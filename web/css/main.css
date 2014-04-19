@@ -233,6 +233,7 @@ h1 {
   font-size: 26px;
   margin: 2em;
 }
+
 .huge-heart {
   display: block;
   font-size: 380px;
@@ -240,7 +241,18 @@ h1 {
   margin: 0px 60px;
   color: #b43;
 }
-
+@media (max-width: 500px) {
+  .big {
+    font-size: 16px;
+    margin: 1em;
+  }
+  .huge-heart {
+    font-size: 200px;
+    float:none;
+    display:block;
+    margin: 0 auto;
+  }
+}
 /* ********* Footer ******** */
 #footer {
   background: #ddd;
