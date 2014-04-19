@@ -51,8 +51,6 @@ body.loading .load{
   position:relative;
 }
 #small-logo img {
-  position:absolute;
-  left: -50px;
 }
 .divider {
   height: 100px;
@@ -77,11 +75,11 @@ body.loading .load{
   right: 0;
   z-index: 10;
 }
-
-#menubar ul {
-  margin-right: 200px;
+@media (min-width: 500px) {
+  #menubar ul {
+    margin-right: 200px;
+  }
 }
-
 #nav {
   width: 100%;
   position: static;
@@ -144,6 +142,8 @@ body.loading .load{
   width: 30px;
   height: 30px;
   margin: 10px;
+  display:block;
+  float:left;
 }
 .social-icon:hover  {
   text-decoration: none;
@@ -157,7 +157,10 @@ body.loading .load{
 .social-tw {
   background-position-x: 30px;
 }
-
+.social-icons {
+  width: 180px;
+  height: 50px;
+}
 .scroll-top {
  position: fixed;
  bottom: 0;
