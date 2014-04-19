@@ -111,6 +111,7 @@ $(function () {
 /* test function to initilize and handle the map */
 /* TODO: put this into a nice class with a better structure */
 function urbanmap () {
+  'use strict';
   var map = L.map('map', {
     scrollWheelZoom: false,
     infoControl: false
@@ -219,10 +220,9 @@ function urbanmap () {
   });
 
   // Real or fake data. 
-  // var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
-  var dataPromise = new $.Deferred(); 
-  dataPromise.resolve(genrandata());
-  this.map = map;
+  var dataPromise = $.ajax("http://urban-data.sebastianoliva.com:5000/data_point");  
+  // var dataPromise = new $.Deferred(); 
+  // dataPromise.resolve(genrandata());
 
   dataPromise.then(function (response) {
     // hide the loading
@@ -233,7 +233,8 @@ function urbanmap () {
     });
 
     // iterate over the geojson response
-    var feature, data = response._items;
+    var temp, feature, data = response._items;
+    var selectedMarker = null;
     for (var i = 0; i < data.length; i ++) {
       
       feature = data[i];
@@ -248,6 +249,14 @@ function urbanmap () {
       L.geoJson(feature, {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: urbanmarker}).on('click', function (ev){
+
+            var feature = ev.target.feature;
+            if (selectedMarker)
+              selectedMarker.src = "img/urbanmarker.png"
+
+            selectedMarker = ev.originalEvent.target;
+            ev.originalEvent.target.src = "img/urbanmarker_highlighted.png";
+
             var info = "<h4>Station information <br/> ("+feature.properties.name+")</h4>";
             if (feature.properties.temperature)
               info += "<strong>Temperature: </strong><span class='property'>"+ feature.properties.temperature.toFixed(2)+" &deg;C</span> <br />";  
@@ -258,15 +267,17 @@ function urbanmap () {
             if (feature.properties.noise)
               info += "<strong>Noise level: </strong><span class='property'> "+ feature.properties.noise.toFixed(2)+" dB</span> <br />";
 
+            // Screen should have considerable height to show the marker info.
             if ($(window).height() > 550) {
               toggleSidePanel(null, true);
               $("#featureInfo").html(info);
             } else {
-              // TODO: 
+              // TODO: show a popup instead ? 
             }
           });
         }
       }).addTo(map);
+
       if (feature.properties.humidity) 
         humidityLayer.addLatLng(new L.latLng(
           [feature.geometry.coordinates[1], feature.geometry.coordinates[0], feature.properties.humidity] 
