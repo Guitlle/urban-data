@@ -16,7 +16,7 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: url(../img/bg.jpg) repeat;
+    background: url(../images/bg.jpg) repeat;
     color: #808080;
     font-size: 15px;
 }
@@ -27,7 +27,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background: url(../img/loading.gif) no-repeat center center #000;
+    background: url(../images/loading.gif) no-repeat center center #000;
     opacity: 0;
     transition: opacity .5s ease-in-out;
     z-index: 999;
@@ -150,7 +150,7 @@ body.loading .load{
 }
 
 .social-icon  {
-    background-image: url(../img/social-icons.png);
+    background-image: url(../images/social-icons.png);
     background-position-y: 0px;
     width: 30px;
     height: 30px;
@@ -192,7 +192,7 @@ body.loading .load{
     right: -245px;
     width: 260px;
     height: 100%;
-    background: url(../img/side-panel-bg.png) repeat-y;
+    background: url(../images/side-panel-bg.png) repeat-y;
     color:white;
     font-size: 80%;
 }
@@ -234,7 +234,7 @@ h1 {
 }
 
 #how-description {
-    background: url(../img/how-03.png);
+    background: url(../images/how-03.png);
     width: 500px;
     height: 700px;
     float:left;

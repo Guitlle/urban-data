@@ -49,7 +49,7 @@ function urbanmap () {
     //   fillOpacity: 0.1
     // };
     var urbanmarker = L.icon({
-        iconUrl: 'img/urbanmarker.png',
+        iconUrl: 'images/urbanmarker.png',
         iconAnchor: L.point(16,32),
         className: 'urban-marker'
     });
@@ -168,11 +168,11 @@ function urbanmap () {
 
                         var feature = ev.target.feature;
                         if (selectedMarker) {
-                            selectedMarker.src = 'img/urbanmarker.png';
+                            selectedMarker.src = 'images/urbanmarker.png';
                         }
 
                         selectedMarker = ev.originalEvent.target;
-                        ev.originalEvent.target.src = 'img/urbanmarker_highlighted.png';
+                        ev.originalEvent.target.src = 'images/urbanmarker_highlighted.png';
 
                         var info = '<h4>Station information <br/> ('+feature.properties.agent+')</h4>';
                         if (feature.properties.temperature) {
