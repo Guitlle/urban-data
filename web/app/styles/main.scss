@@ -14,9 +14,296 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
     padding: 0.2em 0;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url(../img/bg.jpg) repeat;
+    color: #808080;
+    font-size: 15px;
+}
+
+.load {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: url(../img/loading.gif) no-repeat center center #000;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.leaflet-top, .leaflet-bottom {
+    z-index: 100 !important;
+}
+
+body.loading .load{
+    opacity: .7;
+}
+
+.masthead {
+    min-height: 400px;
+    position: relative;
+    overflow:hidden;
+}
+
+#logo {
+    position: absolute;
+    left: 0px;
+    bottom: -10px;
+    z-index: 1000;
+}
+@media (max-width: 400px) {
+    #logo {
+        width: 90px;
+        height:90px;
     }
+}
+#small-logo {
+    position:relative;
+}
+#small-logo img {
+}
+.divider {
+    height: 100px;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0 auto -60px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+@media (min-width: 500px) {
+    #menubar ul {
+        margin-right: 200px;
+    }
+}
+#nav {
+    width: 100%;
+    position: static;
+    top: -32px;
+}
+
+#nav.affix {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+@media (min-width: 767px) {
+    .navbar-nav.nav-justified > li{
+        float: none;
+    }
+}
+
+.navbar-nav {
+    margin: 1px 1px;
+}
+
+/* customize nav style */
+.navbar-custom {
+    background-color: #575760;
+    text-transform: uppercase;
+    border-width: 0;
+}
+.navbar-custom  .navbar-nav>li>a {
+    color: #f2f2f2;
+}
+.navbar-custom  .dropdown-menu li>a:hover {
+    color: #fff;
+}
+.navbar-custom  .navbar-nav li>a:hover {
+    background-color: #3f3f45;
+}
+.navbar-nav li .open,
+.navbar-custom .navbar-nav .active a,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+    background-color: #318fb5;
+}
+.navbar-custom .navbar-nav>.dropdown>a .caret {
+    border-top-color: #318fb5;
+    border-bottom-color: #318fb5;
+}
+
+.navbar-collapse.in { /*3.0.2 bug workaround*/
+    overflow-y: visible;
+}
+
+.navbar-toggle {
+    outline: 0;
+}
+
+.social-icon  {
+    background-image: url(../img/social-icons.png);
+    background-position-y: 0px;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    display:block;
+    float:left;
+}
+.social-icon:hover  {
+    text-decoration: none;
+}
+.social-fb {
+    background-position-x: 60px;
+}
+.social-gh {
+    background-position-x: 0px;
+}
+.social-tw {
+    background-position-x: 30px;
+}
+.social-icons {
+    width: 180px;
+    height: 50px;
+}
+.scroll-top {
+    position: fixed;
+    bottom: 0;
+    right: 6%;
+    z-index: 100;
+    background: #f2f3f2;
+    font-size: 24px;
+    border-top-left-radius: 3px;
+    border-top-right-radius :3px;
+}
+
+/* ****** Side panel ******* */
+
+#sidepanel {
+    position:absolute;
+    right: -245px;
+    width: 260px;
+    height: 100%;
+    background: url(../img/side-panel-bg.png) repeat-y;
+    color:white;
+    font-size: 80%;
+}
+#sidepanel > .container {
+    padding-left: 30px;
+    padding-top: 20px;
+    width: 100%;
+}
+#sidepanel .container {
+    position:relative;
+}
+#toggle_panel {
+    position:absolute;
+    top:0px;
+    left: -17px;
+    cursor:pointer;
+}
+#sidepanel .feature {
+    font-size: 12px;
+    padding: 10px;
+    margin-top:2em;
+    background: #445;
+}
+.feature .property {
+    color: #bef;
+    font-weight: bold;
+    font-size: 13px;
+    padding-left: 10px;
+}
+.slider-label {
+    width: 150px;
+}
+/* ******** Content ******** */
+h1 {
+    color: #318fb5;
+    font-weight: bold;
+    font-family: Helvetica;
+    font-size:70px;
+}
+
+#how-description {
+    background: url(../img/how-03.png);
+    width: 500px;
+    height: 700px;
+    float:left;
+    margin-top:100px;
+    color:white;
+    font-weight:bold;
+    font-size: 18px;
+    text-align: justify;
+}
+
+#how-description .top {
+    width: 300px;
+    height: 300px;
+    margin-left: 90px;
+    margin-top: 30px;
+}
+
+#how-description .bottom {
+    width: 300px;
+    margin-left: 90px;
+    margin-top: 120px;
+}
+
+.big{
+    font-size: 26px;
+    margin: 2em;
+}
+
+.huge-heart {
+    display: block;
+    font-size: 380px;
+    float:right;
+    margin: 0px 60px;
+    color: #b43;
+}
+@media (max-width: 500px) {
+    .big {
+        font-size: 16px;
+        margin: 1em;
+    }
+    .huge-heart {
+        font-size: 200px;
+        float:none;
+        display:block;
+        margin: 0 auto;
+    }
+}
+/* ********* Footer ******** */
+#footer {
+    background: #ddd;
+    color:#444;
+    padding: 80px 10px;
+    text-align: center;
+}
+
+/* ******** Custom checkbox ******* */
+.icon-checkbox{
+    margin:5px;
+}
+
+/* ********* Popover for the map ******** */
+.popover {
+    min-width: 200px;
+    font-size: 12px;
+}
+.popover h4 {
+    font-size: 14px;
+    margin-top:0px;
+}
+.popover-content {
+    padding: 4px 15px;
 }
