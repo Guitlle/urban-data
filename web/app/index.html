@@ -1,0 +1,250 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Urban Data</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="../bower_components/mapboxjs/mapbox.css">
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="../bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+
+        <style>
+          body { margin:0; padding:0; }
+          #map { position:absolute; top:0; bottom:0; width:100%; }
+          .leaflet-heatmap-layer {position:absolute;}
+        </style>
+    </head>
+    <body class="loading">
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Wrap all page content here -->
+        <div id="wrap">
+
+            <header class="masthead">
+                <!-- The Map -->
+                <div id="map"></div>
+                <div id="sidepanel">
+                    <div class="container">
+                        <div id="toggle_panel"> <img  src="images/button_toggle-sidepanel.png" /></div>
+
+                        <div class="overlay_selects">
+                            <h4>Select the visible layers</h4>
+
+                            <div class="icon-checkbox btn-group" data-checked="True" data-overlay_map="Temperature">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-check"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">Temperature</button>
+                            </div>
+                            <br />
+                            <div class="icon-checkbox btn-group" data-overlay_map="Humidity">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-unchecked"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">Humidity</button>
+                            </div>
+                            <br />
+                            <div class="icon-checkbox btn-group" data-overlay_map="Light">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-unchecked"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">Light</button>
+                            </div>
+                            <br />
+                            <div class="icon-checkbox btn-group" data-overlay_map="UVLight">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-unchecked"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">UV Light</button>
+                            </div>
+                            <br />
+                            <div class="icon-checkbox btn-group" data-overlay_map="Noise">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-unchecked"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">Noise</button>
+                            </div>
+                            <br />
+                            <div class="icon-checkbox btn-group" data-overlay_map="CO2">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-unchecked"></i></button>
+                                <button type="button" class="btn btn-default disabled slider-label">  CO<sub>2</sub></button>
+                            </div>
+                        </div>
+                        <div id="featureInfo" class="feature" >
+                            <h4>Click on a marker to see its information.</h4>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
+                <img id="logo" src="images/logo.png">
+                <div class="container">
+
+                    <div class="navbar-header" >
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse"  id="menubar">
+                        <div id="small-logo" class="navbar-left hide"><img style="width:50px; height:50px;" src="images/logo-small.png"></div>
+
+                        <div class="social-icons navbar-right">
+                            <a target="_blank" class="social-icon social-tw" href="http://twitter.com/UrbanDataGt" title="Facebook">&nbsp;</a>
+                            <a target="_blank" class="social-icon  social-fb" href="http://facebook.com/urbandata" title="Twitter">&nbsp;</a>
+                            <a target="_blank" class="social-icon social-gh" href="http://github.com/DuGuille/urban-data" title="Github">&nbsp;</a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right" >
+                            <li><a href="#map">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#how-it-works">How It Works</a></li>
+                            <li><a href="#join">Join</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container -->
+            </div><!--/.navbar -->
+
+            <div class="divider" id="about"></div>
+            <div class="container">
+                <h1>About</h1>
+
+                <div>
+                    <h2>What is an Urban Heat Island?</h2>
+                    <p>
+                        Urban heat islands are a phenomenon where surface and air temperature in an urban area is hotter than their rural  surroundings.
+                    </p>
+
+                    <h2>Why does it happen? </h2>
+
+                    <ul>
+                        <li>Urban construction materials are impermeable. Usually, water absorbs thermic energy and evaporets, cooling surfaces. If surfaces do not allow water to be around, heat increases</li>
+
+                        <li>Most manmade materials retain more heat than natural materials</li>
+
+                        <li>Constructions slow down or stop airflow, preventing surfaces to cool.</li>
+
+                        <li>Heat produced by human activities: electrical devices, car engines, industries.</li>
+                        <li>Lack of vegetation produces shade, retains or produces water, and releases water through evaporation.</li>
+                    </ul>
+
+                    <h2> What does it cause? </h2>
+
+                    <ul>
+
+                        <li> ENERGETIC DEMAND: Electronic and mechanic devices use more energy to cool down. This generates more greenhouse gases and smog. Furthermore, when some surfaces heat, they release volatile greenhouse gas emissions. Some industries use water to cool down machineries, also impacting on the water reservoir.</li>
+
+                        <li>INVERSION CAP: During the day, air heats and raises until certain limit. Hot air that is later generated cannot keep rising. The result is an inversion cap that encloses heat and smog near the city.</li>
+
+                        <li>HEALTH: The inversion cap affects health, causing higher cardiac output, low immune system abilities and pulmonary diseases, like lung irritation asthma aggravation, emphysema and bronchitis.</li>
+
+                        <li>Heat waves can produce heat-illness, cardiovascular, cerebrovascular and respiratory traumas </li>
+
+                        <li>CLIMATIC ALTERATIONS: Changes in the low pressure conditions of the inversion cap can produce alterations, like tornadoes. These systems produce more clouds, and therefore, more rain. </li>
+
+                        <li>BIOTIC ALTERATIONS: All living beings have a temperature range in which they survive. For example, in water, heat produces the loss of O<small>2</small>, needed by animals and plants. In land, insects (that can be useful as plague control, polinization, food for birds, etc) are sensitive to dehydration, and can die.  Changes in temperature can confound migration in birds.  In general, temperature affects metabolism, behaviour, and growth rates of species.</li>
+                    </ul>
+                    <h2> WHY IS IT IMPORTANT? </h2>
+                    <p>As an ecosystem we need to adapt. Urban data is important if we want to understand what is going on whith our urban ecosystem. From <b>diagnosis</b> to <b>solutions</b>, urban data is our way to observe our urban ecosystem and understand it. </p>
+
+                    <h3>Our actions are LOCAL. <small>The heat and smog we generate affect the life standards of everyone around us. Let?s find out what is our local impact and how to solve it.</small></h3>
+
+                    <h3>Our actions are GLOBAL. <small> We share the heat and smog that we generate, with the whole world?s atmosphere. Let?s find out what is our global impact and how to solve it.</small></h3>
+
+                </div>
+            </div>
+            <div class="divider" id="how-it-works"></div>
+            <div class="container">
+                <h1>How it works</h1>
+                <div id="how-description">
+                    <p class="top">An <span class="emph">Urban-Box</span> contains a kit that consists of a  raspberry pi, an SD with the needed software, a GPS module, a wifi module, a bunch of sensors (temperature, pressure, humidity, noise), a solar panel and a battery. Extra sensors to measure levels of CO<small>2</small>, light and others could be added easily.</p>
+
+                    <p class="bottom">
+                        The aim is that a large amount of these urban boxes send data to Urban Data periodically. In rural areas a mesh net will be deployed using many units. Other devices will be supported. Phones and tablets with a sensor tag, microcontrollers with sensors and connectivity and others.
+                    </p>
+
+                </div>
+                <img src="images/how-01.png" width="600"  />
+                <br />
+                <img src="images/how-02.png" width="600" />
+
+                <p class="big">Urban Data is open source software and hardware. It will follow the standards to make it easy to integrate with other systems.</p>
+
+            </div>
+
+            <div class="divider" id="join"></div>
+            <div class="container">
+                <h1>Join Us</h1>
+                <i class="glyphicon glyphicon-heart huge-heart"></i>
+                <p class="big">You can participate by getting an Urban Box to send data either to Urban Data or any other Urban Data based server(s). If you are a developer see our <a>developer's guide</a>. There are other ways you can help us. You can spread the word, cite us, use Urban Data for your research or donate so that we can dedicate more effort and time to this project. </p>
+
+            </div>
+            <div class="divider" id="contact"></div>
+            <div class="container">
+                <h1>Contact</h1>
+
+                <p class="big">Send an email to <a href="mailto:urbandataspaceapps@gmail.com">urbandataspaceapps@gmail.com</a></p>
+            </div>
+
+
+        </div><!--/wrap-->
+
+        <div class="container">
+
+            <div class="footer">
+                <p>Urban Data, 2014. <span class="glyphicon glyphicon-heart"></span> from Guatemala</p>
+            </div>
+
+        </div>
+
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/mapboxjs/mapbox.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+
+        <script src='scripts/vendor/leaflet-heat.js'></script>
+        <script src='scripts/vendor/leaflet-HeatLayer.js'></script>
+        <script src="scripts/plugins.js"></script>
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
