@@ -10,6 +10,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="../bower_components/mapboxjs/mapbox.css">
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -209,7 +210,7 @@
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script src="../bower_components/webapps-bower-mapbox/mapbox.js"></script>
+        <script src="../bower_components/mapboxjs/mapbox.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -237,6 +238,10 @@
         <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
         <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
         <!-- endbuild -->
+
+        <script src='scripts/vendor/leaflet-heat.js'></script>
+        <script src='scripts/vendor/leaflet-HeatLayer.js'></script>
+        <script src="scripts/plugins.js"></script>
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
